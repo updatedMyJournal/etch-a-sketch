@@ -77,3 +77,32 @@ body {
   border-radius: 10px;
   box-shadow: 0px 0px 5px black;
 }
+
+@media screen and (min-width: 420px) {
+  .sketch {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    justify-content: center;
+    gap: calc(var(--container-gap-size) * 3);
+  }
+
+  .sidebar {
+    flex-direction: column;
+    gap: calc(var(--sidebar-gap-size) * 1.5);
+  }
+
+  .sidebar button {
+    width: 100%;
+  }
+
+  .sketch {
+    width: 500px;
+    height: 500px;
+  }
+}
