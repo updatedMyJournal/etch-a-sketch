@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Etch a Sketch</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Etch a Sketch</h1>
+    </header>
+
+    <div class="container">
+      <div class="sidebar">
+        <input type="color">
+        <button class="color">Color</button>
+        <button class="random-colors">Random colors</button>
+        <button class="shading">Shading</button>
+        <button class="lighting">Lighting</button>
+        <button class="clear">Clear</button>
+        <div class="range-wrapper">
+          <div class="range-value">16</div>
+          <input type="range" min="16" max="100">
+        </div>
+      </div>
+
+      <div class="sketch"></div>
+    </div>
+  </body>
+
+</html>
