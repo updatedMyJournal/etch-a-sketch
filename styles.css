@@ -56,7 +56,8 @@ body {
   border-radius: 10px;
 }
 
-.sidebar button:hover {
+.sidebar button:hover,
+.sidebar .selected {
   background-color: var(--button-hover-color);
   border: 1px solid var(--button-hover-color);;
   text-shadow: 0 0 5px var(--text-shadow-color);
@@ -78,6 +79,8 @@ body {
   box-shadow: 0px 0px 5px black;
   display: grid;
 }
+
+/* @media */
 
 @media screen and (min-width: 420px) {
   .sketch {

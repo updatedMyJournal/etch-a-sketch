@@ -1,7 +1,23 @@
-let range = document.querySelector('input[type="range"]');
 let grid = document.querySelector('.sketch');
+let sidebar = document.querySelector('.sidebar');
+let range = document.querySelector('input[type="range"]');
 
 generateGrid();
+
+sidebar.onclick = (e) => {
+  let target = e.target;
+
+  if (
+    target.tagName != 'BUTTON'
+    || target.classList.contains('clear')
+    || target.classList.contains('selected')
+  ) return;
+
+  let prevSelectedButton = sidebar.querySelector('.selected');
+
+  prevSelectedButton.classList.remove('selected');
+  target.classList.add('selected');
+};
 
 range.oninput = (e) => {
   let rangeValueElem = document.querySelector('.range-value');
