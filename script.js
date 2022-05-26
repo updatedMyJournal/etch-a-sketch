@@ -1,9 +1,11 @@
 let grid = document.querySelector('.sketch');
 let sidebar = document.querySelector('.sidebar');
+
 let colorInput = document.querySelector('input[type="color"]');
 let colorButton = document.querySelector('.color');
 let clearButton = document.querySelector('.clear');
 let range = document.querySelector('input[type="range"]');
+
 let selectedColor;
 
 generateGrid();
@@ -14,18 +16,18 @@ document.addEventListener('selectstart', (e) => {
 });
 
 sidebar.onclick = (e) => {
-  let target = e.target;
+  let currSelectedButton = e.target;
 
   if (
-    target.tagName != 'BUTTON'
-    || target.classList.contains('clear')
-    || target.classList.contains('selected')
+    currSelectedButton.tagName != 'BUTTON'
+    || currSelectedButton.classList.contains('clear')
+    || currSelectedButton.classList.contains('selected')
   ) return;
 
   let prevSelectedButton = sidebar.querySelector('.selected');
 
   prevSelectedButton.classList.remove('selected');
-  target.classList.add('selected');
+  currSelectedButton.classList.add('selected');
 };
 
 colorInput.oninput = setDrawColor;
@@ -94,6 +96,12 @@ function generateGrid() {
 }
 
 function colorize(elem) {
+  if (isShadingSelected()) {
+    shade(elem);
+
+    return;
+  }
+
   if (isRandomColorSelected()) selectedColor = getRandomColor();
 
   elem.style.backgroundColor = selectedColor;
@@ -109,10 +117,25 @@ function getRandomColor() {
   return `rgb(${rand()}, ${rand()}, ${rand()})`;
 }
 
-function isRandomColorSelected() {
-  let randomColorsButton = sidebar.querySelector('.random-colors');
+function shade(elem) {
+  let [r, g, b] = getComputedStyle(elem)
+    .backgroundColor
+    .replace(/[\(\),%]|rgba?/g, '')
+    .split(' ');
 
-  return randomColorsButton.classList.contains('selected');
+  elem.style.backgroundColor = `rgb(${r - 25.5}, ${g - 25.5}, ${b - 25.5})`;
+}
+
+function isRandomColorSelected() {
+  return sidebar.querySelector('.random-colors').classList.contains('selected');
+}
+
+function isShadingSelected() {
+  return sidebar.querySelector('.shading').classList.contains('selected');
+}
+
+function isLightingSelected() {
+  return sidebar.querySelector('.lighting').classList.contains('selected');
 }
 
 function isGridItem(elem) {

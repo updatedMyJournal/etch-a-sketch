@@ -80,6 +80,10 @@ body {
   display: grid;
 }
 
+.sketch div {
+  background-color: inherit;
+}
+
 /* @media */
 
 @media screen and (min-width: 420px) {
