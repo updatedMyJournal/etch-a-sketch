@@ -102,6 +102,12 @@ function colorize(elem) {
     return;
   }
 
+  if (isLightingSelected()) {
+    light(elem);
+
+    return;
+  }
+
   if (isRandomColorSelected()) selectedColor = getRandomColor();
 
   elem.style.backgroundColor = selectedColor;
@@ -118,12 +124,22 @@ function getRandomColor() {
 }
 
 function shade(elem) {
-  let [r, g, b] = getComputedStyle(elem)
+  let [r, g, b] = getRGB(elem);
+
+  elem.style.backgroundColor = `rgb(${r - 25.5}, ${g - 25.5}, ${b - 25.5})`;
+}
+
+function light(elem) {
+  let [r, g, b] = getRGB(elem);
+
+  elem.style.backgroundColor = `rgb(${+r + 25.5}, ${+g + 25.5}, ${+b + 25.5})`;
+}
+
+function getRGB(elem) {
+  return getComputedStyle(elem)
     .backgroundColor
     .replace(/[\(\),%]|rgba?/g, '')
     .split(' ');
-
-  elem.style.backgroundColor = `rgb(${r - 25.5}, ${g - 25.5}, ${b - 25.5})`;
 }
 
 function isRandomColorSelected() {
