@@ -2,6 +2,7 @@ let grid = document.querySelector('.sketch');
 let sidebar = document.querySelector('.sidebar');
 let colorInput = document.querySelector('input[type="color"]');
 let colorButton = document.querySelector('.color');
+let clearButton = document.querySelector('.clear');
 let range = document.querySelector('input[type="range"]');
 let selectedColor;
 
@@ -30,6 +31,14 @@ sidebar.onclick = (e) => {
 colorInput.oninput = setDrawColor;
 
 colorButton.onclick = setDrawColor;
+
+clearButton.onclick = () => {
+  let gridItems = grid.querySelectorAll('div');
+
+  for (let item of gridItems) {
+    item.style.backgroundColor = 'var(--sketch-bg-color)';
+  }
+};
 
 range.oninput = (e) => {
   let rangeValueElem = document.querySelector('.range-value');
