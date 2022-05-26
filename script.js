@@ -1,8 +1,15 @@
 let grid = document.querySelector('.sketch');
 let sidebar = document.querySelector('.sidebar');
+let colorElem = document.querySelector('input[type="color"]');
 let range = document.querySelector('input[type="range"]');
+let selectedColor = getColor();
+let outsideOfGrid = true;
 
 generateGrid();
+
+document.addEventListener('selectstart', (e) => {
+  e.preventDefault();
+});
 
 sidebar.onclick = (e) => {
   let target = e.target;
@@ -19,13 +26,39 @@ sidebar.onclick = (e) => {
   target.classList.add('selected');
 };
 
+colorElem.onchange = () => {
+  selectedColor = getColor();
+};
+
 range.oninput = (e) => {
   let rangeValueElem = document.querySelector('.range-value');
 
   rangeValueElem.textContent = e.target.value;
 };
 
-range.onchange = () => generateGrid();
+range.onchange = () => {
+  generateGrid();
+};
+
+grid.onpointerdown = (e) => {
+  let target = e.target;
+
+  if (!isGridItem(target)) return;
+
+  colorize(target);
+
+  grid.onpointerover = (e) => {
+    let target = e.target;
+
+    if (!isGridItem(target)) return;
+
+    colorize(target);
+  };
+};
+
+document.addEventListener('pointerup', () => {
+  grid.onpointerover = null;
+});
 
 function generateGrid() {
   let gridSize = document.querySelector('.range-value').textContent;
@@ -50,4 +83,16 @@ function generateGrid() {
 
     return documentFragment;
   }
+}
+
+function colorize(elem) {
+  elem.style.backgroundColor = selectedColor;
+}
+
+function getColor() {
+  return colorElem.value;
+}
+
+function isGridItem(elem) {
+  return elem.parentElement == grid;
 }
