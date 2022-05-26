@@ -1,11 +1,12 @@
 let grid = document.querySelector('.sketch');
 let sidebar = document.querySelector('.sidebar');
-let colorElem = document.querySelector('input[type="color"]');
+let colorInput = document.querySelector('input[type="color"]');
+let colorButton = document.querySelector('.color');
 let range = document.querySelector('input[type="range"]');
-let selectedColor = getColor();
-let outsideOfGrid = true;
+let selectedColor;
 
 generateGrid();
+setDrawColor();
 
 document.addEventListener('selectstart', (e) => {
   e.preventDefault();
@@ -26,9 +27,9 @@ sidebar.onclick = (e) => {
   target.classList.add('selected');
 };
 
-colorElem.onchange = () => {
-  selectedColor = getColor();
-};
+colorInput.oninput = setDrawColor;
+
+colorButton.onclick = setDrawColor;
 
 range.oninput = (e) => {
   let rangeValueElem = document.querySelector('.range-value');
@@ -36,9 +37,7 @@ range.oninput = (e) => {
   rangeValueElem.textContent = e.target.value;
 };
 
-range.onchange = () => {
-  generateGrid();
-};
+range.onchange = generateGrid;
 
 grid.onpointerdown = (e) => {
   let target = e.target;
@@ -86,11 +85,25 @@ function generateGrid() {
 }
 
 function colorize(elem) {
+  if (isRandomColorSelected()) selectedColor = getRandomColor();
+
   elem.style.backgroundColor = selectedColor;
 }
 
-function getColor() {
-  return colorElem.value;
+function setDrawColor() {
+  selectedColor = colorInput.value;
+}
+
+function getRandomColor() {
+  let rand = () => Math.floor(Math.random() * 256); 
+  
+  return `rgb(${rand()}, ${rand()}, ${rand()})`;
+}
+
+function isRandomColorSelected() {
+  let randomColorsButton = sidebar.querySelector('.random-colors');
+
+  return randomColorsButton.classList.contains('selected');
 }
 
 function isGridItem(elem) {
