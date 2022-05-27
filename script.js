@@ -7,6 +7,8 @@ let clearButton = document.querySelector('.clear');
 let range = document.querySelector('input[type="range"]');
 
 let selectedColor;
+let sketchBgColor = getComputedStyle(document.documentElement)
+  .getPropertyValue('--sketch-bg-color');
 
 generateGrid();
 setDrawColor();
@@ -38,7 +40,7 @@ clearButton.onclick = () => {
   let gridItems = grid.querySelectorAll('div');
 
   for (let item of gridItems) {
-    item.style.backgroundColor = 'var(--sketch-bg-color)';
+    item.style.backgroundColor = sketchBgColor;
   }
 };
 
@@ -108,6 +110,12 @@ function colorize(elem) {
     return;
   }
 
+  if (isEraserSelected()) {
+    erase(elem);
+
+    return;
+  }
+
   if (isRandomColorSelected()) selectedColor = getRandomColor();
 
   elem.style.backgroundColor = selectedColor;
@@ -135,6 +143,10 @@ function light(elem) {
   elem.style.backgroundColor = `rgb(${+r + 25.5}, ${+g + 25.5}, ${+b + 25.5})`;
 }
 
+function erase(elem) {
+  elem.style.backgroundColor = sketchBgColor;
+}
+
 function getRGB(elem) {
   return getComputedStyle(elem)
     .backgroundColor
@@ -152,6 +164,10 @@ function isShadingSelected() {
 
 function isLightingSelected() {
   return sidebar.querySelector('.lighting').classList.contains('selected');
+}
+
+function isEraserSelected() {
+  return sidebar.querySelector('.eraser').classList.contains('selected');
 }
 
 function isGridItem(elem) {
