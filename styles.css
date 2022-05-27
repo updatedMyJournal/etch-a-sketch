@@ -9,7 +9,7 @@ body {
 }
 
 html {
-  --text-color: #f1ecf2;
+  --text-color: white;
   --text-shadow-color: #801792;
   --sketch-bg-color: #ccc;
   --button-bg-color: #3b0d42;
@@ -54,12 +54,13 @@ body {
   box-shadow: 0 0 5px black;
   border: 1px solid var(--button-bg-color);
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .sidebar button:hover,
 .sidebar .selected {
   background-color: var(--button-hover-color);
-  border: 1px solid var(--button-hover-color);;
+  border: 1px solid var(--button-hover-color);
   text-shadow: 0 0 5px var(--text-shadow-color);
   box-shadow: 0px 0px 5px var(--text-color);
 }
@@ -68,15 +69,14 @@ input[type="color"] {
   width: 70px;
   height: 70px;
   padding: 0;
-  background-color: var(--button-bg-color);
-  box-shadow: 0 0 5px black;
+  background-color: black;
+  box-shadow: 0 0 5px var(--sketch-bg-color);
   border: none;
   border-radius: 50%; 
+  cursor: pointer;
 }
 
 input[type="color"]:hover {
-  background-color: var(--button-hover-color);
-  border: 1px solid var(--button-hover-color);;
   box-shadow: 0px 0px 5px var(--text-color);
 }
 
@@ -91,13 +91,13 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 /* firefox */
-input[type=color]::-moz-focus-inner {
+input[type="color"]::-moz-focus-inner {
   border: none;
-  padding: 0;
   border-radius: 50%;
+  padding: 0;
 }
 
-input[type=color]::-moz-color-swatch {
+input[type="color"]::-moz-color-swatch {
   border: none;
   border-radius: 50%;
 }
