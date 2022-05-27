@@ -17,19 +17,29 @@ document.addEventListener('selectstart', (e) => {
   e.preventDefault();
 });
 
-sidebar.onclick = (e) => {
+sidebar.onpointerdown = (e) => {
   let currSelectedButton = e.target;
 
-  if (
-    currSelectedButton.tagName != 'BUTTON'
-    || currSelectedButton.classList.contains('clear')
-    || currSelectedButton.classList.contains('selected')
-  ) return;
+  if (currSelectedButton.tagName != 'BUTTON'
+    && currSelectedButton != colorInput) return;
+
+  currSelectedButton.setPointerCapture(e.pointerId);
+  animate(currSelectedButton);
+
+  if (currSelectedButton == clearButton
+    || currSelectedButton == colorInput) return;
 
   let prevSelectedButton = sidebar.querySelector('.selected');
 
   prevSelectedButton.classList.remove('selected');
   currSelectedButton.classList.add('selected');
+};
+
+sidebar.onpointerup = (e) => {
+  if (e.target.tagName != 'BUTTON'
+    && e.target != colorInput) return;
+
+  removeAnimate(e.target);
 };
 
 colorInput.oninput = setDrawColor;
@@ -95,6 +105,14 @@ function generateGrid() {
 
     return documentFragment;
   }
+}
+
+function animate(elem) {
+  elem.style.transform = 'scale(0.9)';
+}
+
+function removeAnimate(elem) {
+  elem.style.transform = '';
 }
 
 function colorize(elem) {

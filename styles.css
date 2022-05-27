@@ -106,6 +106,10 @@ input[type="color"]::-moz-color-swatch {
   width: 100%;
 }
 
+input[type="range"] {
+  margin-top: var(--sidebar-gap-size);
+}
+
 /* sketch */
 
 .sketch {
