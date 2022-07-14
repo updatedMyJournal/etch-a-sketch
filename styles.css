@@ -35,7 +35,7 @@ body {
   gap: var(--container-gap-size);
   min-width: 300px;
   max-width: 1000px;
-  margin: auto;
+  margin:  0 auto 20px auto;
 }
 
 /* sidebar */
@@ -121,6 +121,7 @@ input[type="range"] {
   border-radius: 10px;
   box-shadow: 0px 0px 5px black;
   display: grid;
+  touch-action: none;
 }
 
 .sketch div {
