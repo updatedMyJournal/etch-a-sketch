@@ -21,11 +21,18 @@ html {
 body {
   background: linear-gradient(135deg, #000000 , #620e70);
   background-repeat: no-repeat;
-  background-attachment: fixed;
   color: var(--text-color);
   text-shadow: 0 0 5px var(--text-shadow-color);
   text-align: center;
   cursor: default;
+}
+
+header {
+  padding: 25px 0;
+}
+
+header h1 {
+  margin: 0;
 }
 
 .container {
@@ -35,7 +42,8 @@ body {
   gap: var(--container-gap-size);
   min-width: 300px;
   max-width: 1000px;
-  margin:  0 auto 20px auto;
+  margin:  0 auto;
+  padding-bottom: 60px;
 }
 
 /* sidebar */
@@ -131,6 +139,14 @@ input[type="range"] {
 /* @media */
 
 @media screen and (min-width: 420px) {
+  body {
+    background-attachment: fixed;
+  }
+
+  .container {
+    padding-bottom: 25px;
+  }
+
   .sketch {
     width: 400px;
     height: 400px;
